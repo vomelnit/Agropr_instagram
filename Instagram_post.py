@@ -347,7 +347,7 @@ def begin_of_driver(image_link, name, text, hashtag, number,high_text,link):
             print("Attempt #"+str(attempt))
             print(str(successful_post))
             #attempt+=1
-            if (attempt>=15): break
+            if (attempt>=20): break
 
         if_post=successful_post
         successful_post=False
