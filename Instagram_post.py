@@ -13,7 +13,7 @@ import Conf_features
 import  hashtag_creator
 # probably_posted=False
 # counter_of_posts=0
-
+import Cookies
 
 mobile_emulation = { "deviceName": "iPhone 6" }
 #img_link=''
@@ -82,52 +82,83 @@ def enter_to_instagram(driver):
 
 
 
-        except:
-                pass
+        except Exception as msg:
+                print(msg)
 
-        driver.get("https://www.instagram.com/accounts/login/?source=auth_switcher")
-        # driver.implicitly_wait(10)
-        #time.sleep(1)
-        #WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//*[text()='Log in']")))
-        #try:
-        # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//main/article/div/div/div/button")))
-        # button_login = driver.find_element_by_xpath("//*[text()='Log in']")
-        # button_login.click()
-            #WebDriverWait(driver, 10).until(EC.)
-
-            #user_mail = driver.find_element_by_xpath("//*[@class='login-button__user']")
-            #assert user_mail.text == "au"
-        # except selenium.common.exceptions.NoSuchElementException:
-        #     link_entry = driver.find_element_by_link_text("/accounts/login/?source=auth_switcher")
-        #     link_entry.click()
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Phone number, username, or email']")))
-        login_field = driver.find_element_by_name("username")
-        login_field.send_keys(username)
-        WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//*[text()='Password']")))
-        password_field = driver.find_element_by_name("password")
-        password_field.send_keys(psw)
-        # button_entry = driver.find_element_by_xpath("//*[text()='Войти']")
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Log in']")))
-        time.sleep(1)
-        entry_form = driver.find_element_by_xpath("//form[@method='post']")
-        entry_form.submit()
-        #button_entry = driver.find_element_by_xpath("//*[text()='Log in']")
-        #button_entry.click()
-        print("Log in")
-        #time.sleep(5)
-        #driver.implicitly_wait(10)
-        #WebDriverWait(driver,10).until(EC.visibility_of_all_elements_located)
         try:
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Not Now']")))
-                #driver.implicitly_wait(10)
-                button_not_now = driver.find_element_by_xpath("//*[text()='Not Now']")
-                button_not_now.click()
-                print("Not now")
-        except:
-                pass
+                # cookies = Cookies.pickle.load(open(Conf_features.Cookies_file_name, "rb"))
+                # print(len(cookies))
+                # print(cookies)
+                # driver.get("https://www.google.com/")
+                # for cookie in cookies:  # session cookies
+                #         # Setting domain to None automatically instructs most webdrivers to use the domain of the current window
+                #         # handle
+                #         cookie_dict = {'domain': cookie.get('domain'), 'name': cookie.get('name'),
+                #                        'value': cookie.get('value'), 'secure': cookie.get('secure')}
+                #         if cookie.get('expires') != None:
+                #                 cookie_dict['expiry'] = cookie.get('expires')
+                #         if cookie.get('path') != None:
+                #                 cookie_dict['path'] = cookie.get('path')
+                #         if cookie.get('httpOnly') != None:
+                #                 cookie_dict['httpOnly'] = cookie.get('httpOnly')
+                #         print(cookie_dict)
+                #
+                #         driver.add_cookie(cookie_dict)
+                driver = Cookies.Get_cookies(driver,Conf_features.Cookies_file_name)
 
+        except Exception as msg:
+                print(msg)
+                driver.get("https://www.instagram.com/accounts/login/?source=auth_switcher")
+                # driver.implicitly_wait(10)
+                #time.sleep(1)
+                #WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//*[text()='Log in']")))
+                #try:
+                # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//main/article/div/div/div/button")))
+                # button_login = driver.find_element_by_xpath("//*[text()='Log in']")
+                # button_login.click()
+                    #WebDriverWait(driver, 10).until(EC.)
+
+                    #user_mail = driver.find_element_by_xpath("//*[@class='login-button__user']")
+                    #assert user_mail.text == "au"
+                # except selenium.common.exceptions.NoSuchElementException:
+                #     link_entry = driver.find_element_by_link_text("/accounts/login/?source=auth_switcher")
+                #     link_entry.click()
+                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Phone number, username, or email']")))
+                login_field = driver.find_element_by_name("username")
+                login_field.send_keys(username)
+                WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//*[text()='Password']")))
+                password_field = driver.find_element_by_name("password")
+                password_field.send_keys(psw)
+                # button_entry = driver.find_element_by_xpath("//*[text()='Войти']")
+                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Log in']")))
+                time.sleep(1)
+                entry_form = driver.find_element_by_xpath("//form[@method='post']")
+                entry_form.submit()
+                #button_entry = driver.find_element_by_xpath("//*[text()='Log in']")
+                #button_entry.click()
+                print("Log in")
+
+                #time.sleep(600)
+                #Cookies.pickle.dump(driver.get_cookies(), open(Conf_features.Cookies_file_name, "wb"))
+
+                #driver.implicitly_wait(10)
+                #WebDriverWait(driver,10).until(EC.visibility_of_all_elements_located)
+                try:
+                        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Not Now']")))
+                        #driver.implicitly_wait(10)
+                        button_not_now = driver.find_element_by_xpath("//*[text()='Not Now']")
+                        button_not_now.click()
+                        print("Not now")
+                except Exception as msg:
+                        print(msg)
+
+        # time.sleep(5)
+        # driver.get("https://www.instagram.com/")
+
+        time.sleep(5)
         driver.get("https://www.instagram.com/" + username)
+        #driver = Cookies.Get_cookies(driver, Conf_features.Cookies_file_name)
         # WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//span[@aria-label='Profile']")))
         # driver.get("https://www.instagram.com/"+username)
         #time.sleep(1)
@@ -148,28 +179,37 @@ def enter_to_instagram(driver):
 
         if successful_post == False:
 
-                driver.get("https://www.instagram.com/")
-                time.sleep(1)
+                print(driver.current_url)
+                #driver.get("https://www.instagram.com/")
+                time.sleep(2)
+                print(driver.current_url)
                 WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[@aria-label='New Post']")))
                 button_new_post = driver.find_element_by_xpath("//span[@aria-label='New Post']")
                 print(button_new_post.get_attribute("aria-label"))
-
+                print(driver.current_url)
                 button_new_post.click()
-                # time.sleep(1)
+                time.sleep(2)
                 # button_new_post = driver.find_element_by_xpath("//span[@aria-label='New Post']")
                 # button_new_post.click()
+                print(driver.current_url)
                 print("Menuitem_add_post")
                 #driver.refresh()
                 send_img=driver.find_element_by_xpath("//input[@accept='image/jpeg']")
+                print(driver.current_url)
                 #send_form=driver.find_elements_by_xpath("//form[@enctype='multipart/form-data']")
                 #print(send_img)
                 #time.sleep(2)
                 #print(send_form)
                 #send_img.click()
                 Imagepath = os.path.abspath('agropravda_images/'+'img_of_article'+str(article_number)+'.jpg')
-                #
+                print(driver.current_url)
                 send_img.send_keys(Imagepath)
+                time.sleep(1)
+                print(driver.current_url)
+
                 print("Sent keys of img")
+
+
                 # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Expand']")))
                 # spire_button = driver.find_element_by_xpath("//*[text()='Expand']")
                 # spire_button.click()
@@ -266,7 +306,7 @@ def setUp():
         # Add the mobile emulation to the chrome options variable
         chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
         chrome_options.add_experimental_option("prefs", {"intl.accept_languages": "en-US"})
-        chrome_options.add_argument('headless')
+        #chrome_options.add_argument('headless')
         #self.driver\
         driv = webdriver.Chrome(executable_path='./chromedriver',chrome_options=chrome_options)
         return driv
@@ -282,11 +322,14 @@ def test_user_login_in_mail_box(dr):
         print(time.strftime("%H:%M:%S", time.gmtime(time.time())))
         try:
                 enter_to_instagram(driver)
-        except:
+                Cookies.pickle.dump(driver.get_cookies(), open(Conf_features.Cookies_file_name, "wb"))
+        except Exception as msg:
+            print(msg)
             print("Error_of instagram")
             attempt+=1
         print(time.strftime("%H:%M:%S", time.gmtime(time.time())))
         #driver.close()
+
         driver.quit()
 
 def tear_down(self):
@@ -304,7 +347,7 @@ def begin_of_driver(image_link, name, text, hashtag, number,high_text,link):
             print("Attempt #"+str(attempt))
             print(str(successful_post))
             #attempt+=1
-            if (attempt>=8): break
+            if (attempt>=15): break
 
         if_post=successful_post
         successful_post=False

@@ -39,7 +39,8 @@ def parse_agropravda(list):
             article_title = search_for_quots(entry.title)
             list.append(article_title)
 
-    except Exception:
+    except Exception as msg:
+        print(msg)
         print(time.strftime("%H:%M", time.localtime()) + "  Error parse")
 
 def search_for_quots(title_text):
@@ -50,7 +51,7 @@ def search_for_quots(title_text):
 
 
 if __name__ == '__main__':
-    parse_agropravda(list_of_articles)
+    #parse_agropravda(list_of_articles)
 
 
 
@@ -190,7 +191,8 @@ if __name__ == '__main__':
                                     if (i <=6):
                                         i = -1
                                         article_posted=True
-                                except Exception:
+                                except Exception as msg:
+                                    print(msg)
                                     print(time.strftime("%H:%M", time.localtime()) + " i=" + str(i))
                                     if (article_posted==True):list_of_articles.append(article_title)
                                     i+=1
@@ -209,6 +211,7 @@ if __name__ == '__main__':
 
                 time.sleep(900)
 
-            except Exception:
+            except Exception as msg:
+                 print(msg)
                  print(time.strftime("%H:%M", time.localtime()) + "  Error loop")
                  time.sleep(900)
