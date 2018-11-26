@@ -1,5 +1,4 @@
 username="agropravda"
 password="agropravda233"
-# username="agro_fun1"
-# password="agro_fun"
+
 Cookies_file_name = "cookies.pkl"

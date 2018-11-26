@@ -306,7 +306,7 @@ def setUp():
         # Add the mobile emulation to the chrome options variable
         chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
         chrome_options.add_experimental_option("prefs", {"intl.accept_languages": "en-US"})
-        #chrome_options.add_argument('headless')
+        chrome_options.add_argument('headless')
         #self.driver\
         driv = webdriver.Chrome(executable_path='./chromedriver',chrome_options=chrome_options)
         return driv
